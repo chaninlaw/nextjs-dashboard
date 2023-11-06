@@ -6,6 +6,9 @@ const {
   users,
 } = require("../app/lib/placeholder-data.js")
 const bcrypt = require("bcrypt")
+const dotenv = require("dotenv")
+
+dotenv.config({ path: ".env.development.local" })
 
 async function seedUsers(client) {
   try {
@@ -171,6 +174,8 @@ async function main() {
   await client.end()
 }
 
-main().catch((err) => {
-  console.error("An error occurred while attempting to seed the database:", err)
+main().catch((error) => {
+  console.error("An error occurred while attempting to seed the database:", {
+    error,
+  })
 })

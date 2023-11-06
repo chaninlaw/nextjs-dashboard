@@ -7,6 +7,8 @@ import {
 } from "@heroicons/react/24/outline"
 import { usePathname } from "next/navigation"
 import clsx from "clsx"
+import { useEffect } from "react"
+import axios from "axios"
 
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
@@ -22,6 +24,17 @@ const links = [
 
 export default function NavLinks() {
   const pathname = usePathname()
+
+  const fetchApi = () => {
+    axios("/api")
+      .then((data) => console.log({ data }))
+      .catch((err) => console.log({ err }))
+  }
+
+  useEffect(() => {
+    const timer = setTimeout(() => fetchApi())
+    return () => clearTimeout(timer)
+  }, [])
 
   return (
     <>
